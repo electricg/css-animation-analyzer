@@ -13,115 +13,16 @@
 <body>
 
 <div class="panel">
-  <img src="images/03-03-bg.png" alt="">
-  <div class="frames animation">
-    <img src="images/03-03-fg-strength-1.png" alt="">
-    <img src="images/03-03-fg-strength-2.png" alt="">
-  </div>
-</div>
-
-<div class="controls">
-  <div>
-    <input type="button" id="play" value="pause">
+  <div class="frames animation">a
   </div>
 </div>
 
 <script src="js/jquery-2.1.1.min.js"></script>
+<script src="js/raf.js"></script>
+<script src="js/main.js"></script>
 <script>
-var $frames = $('.frames');
-var rule = 'twostep';
-
-var $btnPlay = $('#play');
-
-var playState = '-webkit-animation-play-state';
-
-var toggleAnimation = function() {
-  $frames.css(playState, function(i, v) {
-    var btnPlay = 'play';
-    var state = 'paused';
-    if (v === 'paused') {
-      btnPlay = 'pause';
-      state = 'running';
-    }
-    $btnPlay.val(btnPlay);
-    return state;        
-  });
-};
-
-var findKeyframesRule = function(rule) {
-  var ss = document.styleSheets;
-  for (var i = 0; i < ss.length; i++) {
-    for (var j = 0; j < ss[i].cssRules.length; j++) {
-      if (ss[i].cssRules[j].type == window.CSSRule.WEBKIT_KEYFRAMES_RULE && 
-      ss[i].cssRules[j].name == rule) { 
-        return ss[i].cssRules[j]; }
-    }
-  }
-  return null;
-}
-
-var sortKeyframes = function(a, b) {
-  var timeA = a.time;
-  var timeB = b.time;
-  if (timeA < timeB) return -1;
-  if (timeA > timeB) return 1;
-  return 0;
-};
-
-var listKeyframes = function(rule) {
-  var keyframes = findKeyframesRule(rule);
-  if (!keyframes) {
-    return false;
-  }
-
-  var res = [];
-  var temp;
-  var s;
-  for (var i = 0; i < keyframes.cssRules.length; i++) {
-    temp = { style: {} };
-    temp.time = keyframes[i].keyText.replace('%', '') * 1;
-    s = keyframes[i].style;
-    for (var j = 0; j < s.length; j++) {
-      temp.style[ s[j] ] = s[ s[j] ];
-    }
-    res.push(temp);
-  }
-  res.sort(sortKeyframes);
-  return res;
-};
-
-var drawListKeyframes = function(rule) {
-  var keyframes = listKeyframes(rule);
-  var $table = $('<table border=1><thead><th>Time</th><th>Property</th><th>Value</th></thead></table>');
-  var $tbody = $('<tbody></tbody>');
-  var $tr;
-  var c;
-  for (var i = 0; i < keyframes.length; i++) {
-    c = 0;
-    $tr = $('<tr></tr>');
-    $tbody.append($tr);
-    $.each(keyframes[i].style, function(key, value) {
-      if (c === 0) {
-        $tr.append('<td>' + key + '</td>');
-        $tr.append('<td>' + value + '</td>');
-      }
-      else {
-        $tbody.append('<tr><td>' + key + '</td><td>' + value + '</td></tr>');
-      }
-      c++;
-    });
-    $tr.prepend('<td rowspan="' + c + '">' + keyframes[i].time + '</td>');
-  }
-  $table.append($tbody);
-  return $table;
-};
-
-var $table = drawListKeyframes(rule);
-$('body').append($table);
-
-$btnPlay.click(toggleAnimation);
+$('.frames').giulia();
 </script>
-
 <script>
 (function() {
   if (!location.hostname.match('herokuapp.com')) {

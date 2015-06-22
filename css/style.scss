@@ -14,36 +14,77 @@ img {
 }
 
 .panel {
+  background: linear-gradient(to right, transparent 250px, #000 250px, #000 250px, transparent 251px),
+              linear-gradient(          transparent 250px, #000 250px, #000 250px, transparent 251px);
+  border: 1px solid #000;
+  border-radius: 100%;
+  height: 500px;
   position: relative;
-  overflow: hidden;
+  margin: 50px;
+  width: 500px;
+
+  &:before {
+    background: linear-gradient(to right, transparent 250px, #000 250px, #000 250px, transparent 251px),
+                linear-gradient(          transparent 250px, #000 250px, #000 250px, transparent 251px);
+    // border: 1px solid #000;
+    border-radius: 100%;
+    content: '';
+    height: 100%;
+    position: absolute;
+    transform: rotate(45deg);
+    top: -1px;
+    left: 1px;
+    width: 100%;
+  }
 }
 
-@-webkit-keyframes twostep {
-  to {
-    transform: translate3d(-200%, 0, 0);
+@keyframes twostep {
+  #{(100/8*0)}% {
+    background: red;
+    transform: translate3d(250px, 0, 0);
   }
-  55.50970979875% {
-    color: red;
+  #{(100/8*1)}% {
+    background: orange;
+    transform: translate3d(426.78px, 73.22px, 0);
   }
-  from {
-    transform: translate3d(0, 0, 0);
+  #{(100/8*2)}% {
+    background: yellow;
+    transform: translate3d(500px, 250px, 0);
+  }
+  #{(100/8*3)}% {
+    background: lime;
+    transform: translate3d(426.78px, 426.78px, 0);
+  }
+  #{(100/8*4)}% {
+    background: green;
+    transform: translate3d(250px, 500px, 0);
+  }
+  #{(100/8*5)}% {
+    background: cyan;
+    transform: translate3d(73.22px, 426.78px, 0);
+  }
+  #{(100/8*6)}% {
+    background: blue;
+    transform: translate3d(0, 250px, 0);
+  }
+  #{(100/8*7)}% {
+    background: magenta;
+    transform: translate3d(73.22px, 73.22px, 0);
+  }
+  #{(100/8*8)}% {
+    background: red;
+    color: yellow;
+    transform: translate3d(250px, 0, 0);
   }
 }
 .frames {
-  display: block;
-  font-size: 0;
-  left: 0;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  white-space: nowrap;
-  width: 100%;
-}
-.frames img {
-  display: inline-block;
+  background: #000;
+  height: 50px;
+  margin: -25px 0 0 -25px;
+  width: 50px;
 }
 
 .animation {
   // animation: twostep 1s steps(2) infinite;
-  animation: twostep 5s linear infinite;
+  animation: twostep 2s linear alternate-reverse 2 forwards;
 }
