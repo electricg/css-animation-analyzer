@@ -1,0 +1,49 @@
+*, *:after, *:before {
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
+html, body {
+  margin: 0;
+  padding: 0;
+}
+img {
+  border: 0 none;
+  max-height: 100%;
+  max-width: 100%;
+}
+
+.panel {
+  position: relative;
+  overflow: hidden;
+}
+
+@-webkit-keyframes twostep {
+  to {
+    transform: translate3d(-200%, 0, 0);
+  }
+  55.50970979875% {
+    color: red;
+  }
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+}
+.frames {
+  display: block;
+  font-size: 0;
+  left: 0;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  white-space: nowrap;
+  width: 100%;
+}
+.frames img {
+  display: inline-block;
+}
+
+.animation {
+  // animation: twostep 1s steps(2) infinite;
+  animation: twostep 5s linear infinite;
+}
